@@ -2,6 +2,9 @@ package com.mercan.anil.receipt.domain;
 
 
 import javax.persistence.*;
+import java.awt.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Receipe {
@@ -21,8 +24,14 @@ public class Receipe {
     @Lob
     private Byte[] image;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Note note;
+
+
+    //mapped by means property value of many side
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "receipe",fetch = FetchType.LAZY)
+
+    private Set<Ingredient> ingredients;
 
 
     public Long getId() {
